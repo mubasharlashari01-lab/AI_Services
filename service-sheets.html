@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Excel & Google Sheets &mdash; Mubashar Khan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080f1c;--bg2:#0d1b2e;--bg3:#112034;--purple:#7c6ff7;--teal:#14b8a6;--orange:#f97316;--white:#f1f5f9;--muted:#5a7090;--border:#1e3a5f;}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+.c-dot,.c-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.c-dot{width:8px;height:8px;background:var(--purple);transition:width .15s,height .15s,background .2s}
+.c-ring{width:36px;height:36px;border:1.5px solid rgba(124,111,247,.5);transition:width .12s,height .12s,border-color .2s}
+body.cur-hover .c-dot{width:12px;height:12px;background:var(--teal)}
+body.cur-hover .c-ring{width:52px;height:52px;border-color:rgba(20,184,166,.7)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(8,15,28,.9);backdrop-filter:blur(16px);border-bottom:.5px solid rgba(30,58,95,.5)}
+.nav-logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--purple)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--purple);color:var(--white)!important;padding:.5rem 1.25rem;border-radius:100px;font-weight:500!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob-nav{display:none;position:fixed;inset:0;background:var(--bg);z-index:99;flex-direction:column;justify-content:center;align-items:center;gap:2rem}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:'Outfit',sans-serif;font-weight:700;font-size:2.2rem;color:var(--white);text-decoration:none;letter-spacing:-.03em}
+.mob-nav a:hover{color:var(--purple)}
+.mob-close-btn{position:absolute;top:1.4rem;right:5%;font-size:1.5rem;color:var(--muted);background:none;border:none;cursor:none}
+section{padding:5rem 5%;position:relative;z-index:1}
+.sec-label{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem}
+h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:1rem}
+.sec-sub{color:var(--muted);font-size:1rem;font-weight:300;max-width:560px;line-height:1.7;margin-bottom:2rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--purple);color:var(--white);padding:.85rem 2rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.95rem;transition:transform .2s,opacity .2s}
+.btn-primary:hover{transform:translateY(-2px);opacity:.9}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--white);padding:.85rem 2rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.95rem;border:.5px solid var(--border);transition:border-color .2s,transform .2s}
+.btn-secondary:hover{border-color:var(--muted);transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+footer{padding:2rem 5%;border-top:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.foot-logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:1rem;color:var(--white)}
+.foot-logo span{color:var(--purple)}
+.foot-links{display:flex;align-items:center;gap:1.25rem}
+.foot-links a{color:var(--muted);font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:color .2s}
+.foot-links a:hover{color:var(--white)}
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;margin-bottom:2rem}
+.back-btn:hover{color:var(--white)}
+.contact-box{background:var(--bg3);border:.5px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden}
+.contact-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(124,111,247,.07),transparent 60%);pointer-events:none}
+.contact-box h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:.35rem}
+.contact-box .cb-sub{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem}
+.cb-input{width:100%;background:var(--bg2);border:.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:.7rem;resize:none;cursor:none}
+.cb-input:focus{border-color:var(--purple)}
+.cb-input::placeholder{color:var(--muted)}
+.cb-btn{width:100%;background:var(--purple);color:var(--white);border:none;border-radius:10px;padding:1rem;font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;cursor:none;transition:opacity .2s,transform .2s}
+.cb-btn:hover{opacity:.9;transform:translateY(-1px)}
+@media(max-width:960px){.nav-links{display:none}.ham{display:flex}}
+@media(max-width:600px){section{padding:4rem 5%}h2{font-size:1.8rem}.btn-primary,.btn-secondary{width:100%;justify-content:center}}</style>
+</head>
+<body>
+<div class="c-dot"></div><div class="c-ring"></div>
+<nav>
+  <a href="index.html" class="nav-logo">Mubashar<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#reviews">Reviews</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank" class="nav-cta">Hire on Fiverr</a></li>
+  </ul>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close-btn">&#x2715;</button>
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="index.html#services" class="mob-link">Services</a>
+  <a href="index.html#work" class="mob-link">Work</a>
+  <a href="index.html#contact" class="mob-link">Contact</a>
+  <a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank">Hire on Fiverr &#x2192;</a>
+</div>
+
+<section style="padding:8rem 5% 5rem;position:relative;z-index:1;background:var(--bg)">
+  <div style="max-width:1100px;margin:0 auto">
+    <a href="index.html#services" class="back-btn reveal">&#x2190; Back to services</a>
+    <div class="reveal" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem">
+      <div style="width:60px;height:60px;border-radius:16px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;font-size:1.8rem">📊</div>
+      <span style="font-size:.72rem;padding:.28rem .75rem;border-radius:100px;background:rgba(249,115,22,.12);border:.5px solid rgba(249,115,22,.3);color:rgba(249,115,22,1)">Data made clear</span>
+    </div>
+    <h1 style="font-family:Outfit,sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:1.25rem" class="reveal">Excel & Google Sheets</h1>
+    <p style="font-size:1.1rem;color:var(--muted);line-height:1.75;max-width:620px;margin-bottom:2.5rem" class="reveal">I build smart spreadsheet systems — from simple automated trackers to complex multi-tab architectures with dashboards, formulas, and Google Apps Script automation. If your team is spending hours on manual data entry or reporting, I can turn your spreadsheet into a powerful, automated business tool.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap" class="reveal">
+      <a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(249,115,22,1);color:white;padding:.85rem 2rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.95rem;transition:transform .2s,opacity .2s">Hire me on Fiverr &#x2192;</a>
+      <a href="https://wa.me/923167474119" target="_blank" class="btn-secondary"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp me</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg2);padding:5rem 5%;position:relative;z-index:1">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start" class="two-col">
+    <div>
+      <div class="sec-label reveal">What&apos;s included</div>
+      <h2 class="reveal">Everything you get</h2>
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:12px"><div style="width:28px;height:28px;border-radius:8px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(249,115,22,1);font-size:.9rem;font-weight:700">&#x2713;</div><div><div style="font-weight:500;font-size:.9rem;margin-bottom:.2rem">Custom Dashboard Design</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6">Clean visual dashboards with charts, KPIs, and summary metrics — updated automatically from your data.</div></div></div><div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:12px"><div style="width:28px;height:28px;border-radius:8px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(249,115,22,1);font-size:.9rem;font-weight:700">&#x2713;</div><div><div style="font-weight:500;font-size:.9rem;margin-bottom:.2rem">Advanced Formula Architecture</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6">VLOOKUP, INDEX/MATCH, SUMIF, COUNTIFS, array formulas, and named ranges — whatever your data needs.</div></div></div><div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:12px"><div style="width:28px;height:28px;border-radius:8px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(249,115,22,1);font-size:.9rem;font-weight:700">&#x2713;</div><div><div style="font-weight:500;font-size:.9rem;margin-bottom:.2rem">Google Apps Script Automation</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6">Custom scripts that automate repetitive tasks, send emails, sync data, or run on a schedule.</div></div></div><div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:12px"><div style="width:28px;height:28px;border-radius:8px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(249,115,22,1);font-size:.9rem;font-weight:700">&#x2713;</div><div><div style="font-weight:500;font-size:.9rem;margin-bottom:.2rem">VBA Macros (Excel)</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6">For Excel-specific automation — button-triggered macros, form processing, and report generation.</div></div></div><div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:12px"><div style="width:28px;height:28px;border-radius:8px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(249,115,22,1);font-size:.9rem;font-weight:700">&#x2713;</div><div><div style="font-weight:500;font-size:.9rem;margin-bottom:.2rem">Multi-Sheet Data Systems</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6">Linked spreadsheet systems where data flows between sheets automatically — no copy-pasting.</div></div></div><div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:12px"><div style="width:28px;height:28px;border-radius:8px;background:rgba(249,115,22,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:rgba(249,115,22,1);font-size:.9rem;font-weight:700">&#x2713;</div><div><div style="font-weight:500;font-size:.9rem;margin-bottom:.2rem">Data Cleaning & Structuring</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6">Transform messy raw data into clean, well-structured tables ready for analysis or reporting.</div></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-label">My process</div>
+      <h2>How I work</h2>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;margin-top:1.5rem">
+        <div style="display:flex;gap:1.25rem;align-items:flex-start"><div style="width:36px;height:36px;border-radius:50%;background:rgba(249,115,22,.12);border:.5px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;font-weight:700;font-size:.9rem;color:rgba(249,115,22,1);flex-shrink:0">01</div><div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:1rem;margin-bottom:.3rem">Understand Your Data</div><div style="font-size:.85rem;color:var(--muted);line-height:1.65">I review your current setup, understand your data structure, and identify what the system needs to do.</div></div></div><div style="display:flex;gap:1.25rem;align-items:flex-start"><div style="width:36px;height:36px;border-radius:50%;background:rgba(249,115,22,.12);border:.5px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;font-weight:700;font-size:.9rem;color:rgba(249,115,22,1);flex-shrink:0">02</div><div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:1rem;margin-bottom:.3rem">Architecture Design</div><div style="font-size:.85rem;color:var(--muted);line-height:1.65">I map out the sheet structure, formula logic, and automation plan before writing a single formula.</div></div></div><div style="display:flex;gap:1.25rem;align-items:flex-start"><div style="width:36px;height:36px;border-radius:50%;background:rgba(249,115,22,.12);border:.5px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;font-weight:700;font-size:.9rem;color:rgba(249,115,22,1);flex-shrink:0">03</div><div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:1rem;margin-bottom:.3rem">Build & Test</div><div style="font-size:.85rem;color:var(--muted);line-height:1.65">I build the spreadsheet and test it with real data — checking every formula, automation, and edge case.</div></div></div><div style="display:flex;gap:1.25rem;align-items:flex-start"><div style="width:36px;height:36px;border-radius:50%;background:rgba(249,115,22,.12);border:.5px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;font-weight:700;font-size:.9rem;color:rgba(249,115,22,1);flex-shrink:0">04</div><div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:1rem;margin-bottom:.3rem">Walkthrough & Handover</div><div style="font-size:.85rem;color:var(--muted);line-height:1.65">I walk you through how to use and maintain the system, and deliver full documentation.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg);padding:5rem 5%;position:relative;z-index:1">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sec-label reveal">FAQ</div>
+    <h2 class="reveal">Common questions</h2>
+    <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem;max-width:720px">
+      <details style="border:.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer"><summary style="padding:1.1rem 1.25rem;font-weight:500;font-size:.95rem;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer">Excel or Google Sheets? <span style="font-size:.8rem;color:var(--muted)">+</span></summary><div style="padding:0 1.25rem 1.1rem;color:var(--muted);font-size:.88rem;line-height:1.7">I work with both. Google Sheets is better for collaboration and real-time sharing. Excel is better for complex macros, large datasets, and offline use. I'll recommend the right tool for your needs.</div></details><details style="border:.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer"><summary style="padding:1.1rem 1.25rem;font-weight:500;font-size:.95rem;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer">Can it connect to other tools? <span style="font-size:.8rem;color:var(--muted)">+</span></summary><div style="padding:0 1.25rem 1.1rem;color:var(--muted);font-size:.88rem;line-height:1.7">Yes — Google Sheets can connect to Google Forms, Gmail, Slack, and external APIs via Apps Script. Excel can connect to Power Query data sources and external databases.</div></details><details style="border:.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer"><summary style="padding:1.1rem 1.25rem;font-weight:500;font-size:.95rem;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer">Can multiple people use it at once? <span style="font-size:.8rem;color:var(--muted)">+</span></summary><div style="padding:0 1.25rem 1.1rem;color:var(--muted);font-size:.88rem;line-height:1.7">With Google Sheets, yes — real-time collaboration is built in. With Excel, I can set it up for shared use with conflict protection.</div></details><details style="border:.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer"><summary style="padding:1.1rem 1.25rem;font-weight:500;font-size:.95rem;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer">What if my data changes format? <span style="font-size:.8rem;color:var(--muted)">+</span></summary><div style="padding:0 1.25rem 1.1rem;color:var(--muted);font-size:.88rem;line-height:1.7">I build in flexibility so the system handles new data gracefully. I also document exactly how data should be structured for the system to work correctly.</div></details><details style="border:.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer"><summary style="padding:1.1rem 1.25rem;font-weight:500;font-size:.95rem;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer">Can you fix or improve an existing spreadsheet? <span style="font-size:.8rem;color:var(--muted)">+</span></summary><div style="padding:0 1.25rem 1.1rem;color:var(--muted);font-size:.88rem;line-height:1.7">Yes — this is very common. Send me what you have and I can audit it, fix errors, and improve the structure.</div></details>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg2);padding:5rem 5%;position:relative;z-index:1">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:start" class="cta-grid">
+    <div>
+      <div class="sec-label reveal">Related work</div>
+      <h2 class="reveal">Projects using this service</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem">
+        <a href="project-ledger.html" style="background:var(--bg3);border:.5px solid var(--border);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .25s,border-color .25s" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(249,115,22,.4)'" onmouseout="this.style.transform='';this.style.borderColor=''"><div style="font-size:1.4rem;margin-bottom:.6rem">📊</div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem">Master Ledger System</div><div style="font-size:.8rem;color:rgba(249,115,22,1)">View case study &#x2192;</div></a><a href="project-financial.html" style="background:var(--bg3);border:.5px solid var(--border);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .25s,border-color .25s" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(249,115,22,.4)'" onmouseout="this.style.transform='';this.style.borderColor=''"><div style="font-size:1.4rem;margin-bottom:.6rem">💰</div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem">Financial Coaching Workbook</div><div style="font-size:.8rem;color:rgba(249,115,22,1)">View case study &#x2192;</div></a><a href="project-bid-tracker.html" style="background:var(--bg3);border:.5px solid var(--border);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .25s,border-color .25s" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(249,115,22,.4)'" onmouseout="this.style.transform='';this.style.borderColor=''"><div style="font-size:1.4rem;margin-bottom:.6rem">🏗️</div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem">Bid Tracker — Range Road</div><div style="font-size:.8rem;color:rgba(249,115,22,1)">View case study &#x2192;</div></a><a href="project-safety.html" style="background:var(--bg3);border:.5px solid var(--border);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .25s,border-color .25s" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(249,115,22,.4)'" onmouseout="this.style.transform='';this.style.borderColor=''"><div style="font-size:1.4rem;margin-bottom:.6rem">⚡</div><div style="font-family:Outfit,sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem">Daily Safety Form</div><div style="font-size:.8rem;color:rgba(249,115,22,1)">View case study &#x2192;</div></a>
+      </div>
+    </div>
+    <div class="contact-box reveal">
+  <h3>Start a project</h3>
+  <p class="cb-sub">Tell me about what you need and I'll get back to you fast.</p>
+  <input class="cb-input" type="text" placeholder="Your name">
+  <input class="cb-input" type="email" placeholder="Your email">
+  <textarea class="cb-input" rows="4" placeholder="Describe your project..."></textarea>
+  <button class="cb-btn">Send message &#x2192;</button>
+</div>
+  </div>
+</section>
+<style>.two-col{grid-template-columns:1fr 1fr}.cta-grid{grid-template-columns:1fr 420px}@media(max-width:900px){.two-col,.cta-grid{grid-template-columns:1fr}}</style>
+
+<footer>
+  <div class="foot-logo">Mubashar<span>.</span></div>
+  <p style="color:var(--muted);font-size:.8rem">AI Agents &middot; WordPress &middot; Excel &amp; Google Sheets</p>
+  <div class="foot-links">
+    <a href="https://wa.me/923167474119" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> +92 316 7474 119</a>
+    <a href="mailto:mubasharlashari01@gmail.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z" fill="#EA4335" opacity=".2"/><path d="M2 6l10 7 10-7" fill="#EA4335"/></svg> mubasharlashari01@gmail.com</a>
+  </div>
+</footer>
+<script>
+const dot=document.querySelector('.c-dot'),ring=document.querySelector('.c-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,input,textarea,select').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'))});
+const ham=document.querySelector('.ham'),mob=document.querySelector('.mob-nav'),mc=document.querySelector('.mob-close-btn');
+if(ham){ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});if(mc)mc.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open')});document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open')}))}
+const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const cb=document.querySelector('.cb-btn');
+if(cb)cb.addEventListener('click',()=>{const ins=document.querySelectorAll('.cb-input');let ok=true;ins.forEach(i=>{if(!i.value.trim()){i.style.borderColor='var(--orange)';ok=false}else i.style.borderColor=''});if(ok){cb.textContent='Message sent ✓';cb.style.background='#0f6e56';setTimeout(()=>{cb.textContent='Send message →';cb.style.background='';ins.forEach(i=>i.value='')},3000)}});
+const cv=document.createElement('canvas');cv.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4';document.body.prepend(cv);
+const ctx=cv.getContext('2d');let W,H;const rsz=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rsz();addEventListener('resize',rsz);
+const pts=Array.from({length:40},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.2+.3,c:['rgba(124,111,247,','rgba(20,184,166,','rgba(249,115,22,'][Math.floor(Math.random()*3)]}));
+(function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+'.3)';ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(124,111,247,'+(0.05*(1-d/110))+')';ctx.lineWidth=.5;ctx.stroke()}}requestAnimationFrame(draw)})();
+</script>
+</body></html>

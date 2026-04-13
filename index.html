@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Mubashar Khan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080f1c;--bg2:#0d1b2e;--bg3:#112034;--purple:#7c6ff7;--teal:#14b8a6;--orange:#f97316;--white:#f1f5f9;--muted:#5a7090;--border:#1e3a5f;}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+.c-dot,.c-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.c-dot{width:8px;height:8px;background:var(--purple);transition:width .15s,height .15s,background .2s}
+.c-ring{width:36px;height:36px;border:1.5px solid rgba(124,111,247,.5);transition:width .12s,height .12s,border-color .2s}
+body.cur-hover .c-dot{width:12px;height:12px;background:var(--teal)}
+body.cur-hover .c-ring{width:52px;height:52px;border-color:rgba(20,184,166,.7)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(8,15,28,.9);backdrop-filter:blur(16px);border-bottom:.5px solid rgba(30,58,95,.5)}
+.nav-logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--purple)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--purple);color:var(--white)!important;padding:.5rem 1.25rem;border-radius:100px;font-weight:500!important}
+.nav-cta:hover{opacity:.85}
+.ham{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob-nav{display:none;position:fixed;inset:0;background:var(--bg);z-index:99;flex-direction:column;justify-content:center;align-items:center;gap:2rem}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:'Outfit',sans-serif;font-weight:700;font-size:2.2rem;color:var(--white);text-decoration:none;letter-spacing:-.03em}
+.mob-nav a:hover{color:var(--purple)}
+.mob-close-btn{position:absolute;top:1.4rem;right:5%;font-size:1.5rem;color:var(--muted);background:none;border:none;cursor:none}
+section{padding:5rem 5%;position:relative;z-index:1}
+.sec-label{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem}
+h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:1rem}
+.sec-sub{color:var(--muted);font-size:1rem;font-weight:300;max-width:520px;line-height:1.7;margin-bottom:3rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--purple);color:var(--white);padding:.85rem 2rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.95rem;transition:transform .2s,opacity .2s}
+.btn-primary:hover{transform:translateY(-2px);opacity:.9}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--white);padding:.85rem 2rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.95rem;border:.5px solid var(--border);transition:border-color .2s,transform .2s}
+.btn-secondary:hover{border-color:var(--muted);transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+footer{padding:2rem 5%;border-top:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.foot-logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:1rem;color:var(--white)}
+.foot-logo span{color:var(--purple)}
+.foot-links{display:flex;align-items:center;gap:1.25rem}
+.foot-links a{color:var(--muted);font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:color .2s}
+.foot-links a:hover{color:var(--white)}
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;margin-bottom:2rem}
+.back-btn:hover{color:var(--white)}
+.contact-box{background:var(--bg3);border:.5px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;max-width:480px}
+.contact-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(124,111,247,.07),transparent 60%);pointer-events:none}
+.contact-box h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:.35rem}
+.contact-box p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem}
+.cb-input{width:100%;background:var(--bg2);border:.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:.7rem;resize:none;cursor:none}
+.cb-input:focus{border-color:var(--purple)}
+.cb-input::placeholder{color:var(--muted)}
+.cb-btn{width:100%;background:var(--purple);color:var(--white);border:none;border-radius:10px;padding:1rem;font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;cursor:none;transition:opacity .2s,transform .2s}
+.cb-btn:hover{opacity:.9;transform:translateY(-1px)}
+@media(max-width:960px){.nav-links{display:none}.ham{display:flex}}
+@media(max-width:600px){section{padding:4rem 5%}h2{font-size:1.8rem}}
+.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 5% 5rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(124,111,247,.1) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(124,111,247,.1);border:.5px solid rgba(124,111,247,.3);padding:.35rem 1rem;border-radius:100px;font-size:.8rem;color:var(--purple);margin-bottom:1.5rem;animation:fadeUp .6s ease both,bfloat 4s ease-in-out infinite 1s}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:bpulse 2s infinite}
+@keyframes bpulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes bfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(2.8rem,5vw,4.2rem);line-height:1.05;letter-spacing:-.01em;margin-bottom:1.5rem;animation:fadeUp .6s .1s ease both}
+.hero h1 .accent{color:var(--purple)}
+.hero h1 .accent2{color:var(--teal)}
+.typewriter-cursor{display:inline-block;width:3px;height:1em;background:var(--teal);margin-left:3px;vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-sub{font-size:1.05rem;color:var(--muted);font-weight:300;line-height:1.7;max-width:480px;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+.hero-card{background:var(--bg3);border:.5px solid var(--border);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden;animation:fadeUp .7s .2s ease both,bglow 4s ease-in-out infinite}
+@keyframes bglow{0%,100%{border-color:var(--border)}50%{border-color:rgba(20,184,166,.3)}}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--teal))}
+.hero-avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--purple);animation:apulse 3s ease-in-out infinite}
+@keyframes apulse{0%,100%{box-shadow:0 0 0 0 rgba(124,111,247,.4)}50%{box-shadow:0 0 0 8px rgba(124,111,247,0)}}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.stat{background:rgba(255,255,255,.03);border:.5px solid var(--border);border-radius:12px;padding:1rem}
+.stat-num{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.6rem;color:var(--purple);line-height:1;margin-bottom:.25rem}
+.stat-label{font-size:.75rem;color:var(--muted)}
+#services{background:var(--bg2)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
+.service-card{background:var(--bg3);border:.5px solid var(--border);border-radius:20px;padding:2rem;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;text-decoration:none;display:block;color:var(--white)}
+.service-card:hover{transform:translateY(-6px)}
+.service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0}
+.s-purple::after{background:var(--purple)}.s-teal::after{background:var(--teal)}.s-orange::after{background:var(--orange)}
+.service-card:hover.s-purple{border-color:rgba(124,111,247,.5)}
+.service-card:hover.s-teal{border-color:rgba(20,184,166,.5)}
+.service-card:hover.s-orange{border-color:rgba(249,115,22,.5)}
+.service-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.4rem}
+.icon-p{background:rgba(124,111,247,.15)}.icon-t{background:rgba(20,184,166,.15)}.icon-o{background:rgba(249,115,22,.15)}
+.service-card h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:.3rem}
+.svc-tag{font-size:.8rem;margin-bottom:.75rem}
+.svc-tag.p{color:var(--purple)}.svc-tag.t{color:var(--teal)}.svc-tag.o{color:var(--orange)}
+.service-card p{color:var(--muted);font-size:.88rem;line-height:1.65;margin-bottom:1.25rem}
+.svc-feat{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.svc-feat li{font-size:.83rem;color:var(--muted);display:flex;align-items:center;gap:.55rem}
+.svc-feat li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.s-purple .svc-feat li::before{background:var(--purple)}.s-teal .svc-feat li::before{background:var(--teal)}.s-orange .svc-feat li::before{background:var(--orange)}
+.cta-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.5rem;font-size:.85rem;font-weight:500;text-decoration:none;transition:gap .2s}
+.s-purple .cta-link{color:var(--purple)}.s-teal .cta-link{color:var(--teal)}.s-orange .cta-link{color:var(--orange)}
+.service-card:hover .cta-link{gap:.7rem}
+#process{background:var(--bg)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1200px;margin:0 auto;position:relative}
+.proc-grid::before{content:'';position:absolute;top:28px;left:12.5%;width:75%;height:.5px;background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent)}
+.proc-step{text-align:center;position:relative}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--bg3);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:var(--purple);margin:0 auto 1.25rem;position:relative;z-index:1}
+.step-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.5rem}
+.step-desc{color:var(--muted);font-size:.83rem;line-height:1.6}
+#work{background:var(--bg2)}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1200px;margin:0 auto}
+.work-card{background:var(--bg3);border:.5px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s;text-decoration:none;display:block;color:var(--white)}
+.work-card:hover{transform:translateY(-4px);border-color:var(--purple)}
+.work-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;overflow:hidden}
+.wt-ai{background:linear-gradient(135deg,#1a1640 0%,#2d1f6e 100%)}
+.wt-wp{background:linear-gradient(135deg,#0a2020 0%,#0c3d35 100%)}
+.wt-xl{background:linear-gradient(135deg,#1a0d00 0%,#3d1f00 100%)}
+.wt-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:20px 20px}
+.wk-badge{position:absolute;top:10px;right:10px;font-size:.68rem;font-weight:500;padding:.2rem .6rem;border-radius:100px}
+.wb-p{background:rgba(124,111,247,.2);color:var(--purple);border:.5px solid rgba(124,111,247,.3)}
+.wb-t{background:rgba(20,184,166,.2);color:var(--teal);border:.5px solid rgba(20,184,166,.3)}
+.wb-o{background:rgba(249,115,22,.2);color:var(--orange);border:.5px solid rgba(249,115,22,.3)}
+.work-info{padding:1.25rem}
+.work-info h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.35rem}
+.work-info p{color:var(--muted);font-size:.82rem;line-height:1.6;margin-bottom:.85rem}
+.wk-tools{display:flex;flex-wrap:wrap;gap:.35rem}
+.wk-tool{font-size:.68rem;padding:.18rem .55rem;border-radius:100px;background:var(--bg2);border:.5px solid var(--border);color:var(--muted)}
+.view-more{display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;font-size:.8rem;color:var(--purple);font-weight:500}
+.work-card:hover .view-more{gap:.65rem}
+#reviews{background:var(--bg)}
+.rev-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;max-width:1200px;margin-left:auto;margin-right:auto}
+.rating-box{display:flex;align-items:center;gap:1rem;background:var(--bg3);border:.5px solid var(--border);border-radius:14px;padding:.9rem 1.5rem}
+.r-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:2.2rem;color:var(--white);line-height:1}
+.r-stars{color:#f59e0b;font-size:.9rem;letter-spacing:2px;margin-top:.1rem}
+.r-lbl{color:var(--muted);font-size:.75rem;margin-top:.15rem}
+.rev-div{width:.5px;height:40px;background:var(--border)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1200px;margin:0 auto}
+.rev-card{background:var(--bg3);border:.5px solid var(--border);border-radius:16px;padding:1.5rem;transition:border-color .25s,transform .25s}
+.rev-card:hover{border-color:rgba(124,111,247,.3);transform:translateY(-3px)}
+.rev-stars{color:#f59e0b;font-size:.82rem;letter-spacing:2px;margin-bottom:.9rem}
+.rev-text{font-size:.88rem;color:var(--muted);line-height:1.7;font-style:italic;margin-bottom:1.25rem}
+.rev-footer{display:flex;align-items:center;gap:.7rem;padding-top:1rem;border-top:.5px solid var(--border)}
+.rev-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:.75rem;flex-shrink:0}
+.av-p{background:rgba(124,111,247,.2);color:var(--purple)}
+.av-t{background:rgba(20,184,166,.2);color:var(--teal)}
+.av-o{background:rgba(249,115,22,.2);color:var(--orange)}
+.rev-name{font-weight:500;font-size:.85rem}
+.rev-from{font-size:.72rem;color:var(--muted)}
+.rev-tag{margin-left:auto;font-size:.68rem;padding:.18rem .55rem;border-radius:100px}
+#contact{background:var(--bg2);text-align:center}
+.contact-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:4rem;align-items:start;text-align:left}
+.contact-chips{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
+.chip{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.04);border:.5px solid var(--border);border-radius:100px;padding:.65rem 1.25rem;text-decoration:none;color:var(--muted);transition:border-color .2s,color .2s}
+.chip:hover{border-color:var(--purple);color:var(--white)}
+@media(max-width:1100px){.hero-inner,.contact-inner{grid-template-columns:1fr}.hero-card,.contact-box{max-width:460px}}
+@media(max-width:960px){.services-grid,.work-grid,.rev-grid{grid-template-columns:1fr 1fr}.proc-grid{grid-template-columns:1fr 1fr}.proc-grid::before{display:none}}
+@media(max-width:600px){.services-grid,.work-grid,.rev-grid,.proc-grid{grid-template-columns:1fr}.hero-btns{flex-direction:column}.btn-primary,.btn-secondary{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="c-dot"></div><div class="c-ring"></div>
+<nav>
+  <a href="index.html" class="nav-logo">Mubashar<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#reviews">Reviews</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank" class="nav-cta">Hire on Fiverr</a></li>
+  </ul>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close-btn">✕</button>
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="index.html#services" class="mob-link">Services</a>
+  <a href="index.html#work" class="mob-link">Work</a>
+  <a href="index.html#contact" class="mob-link">Contact</a>
+  <a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank">Hire on Fiverr →</a>
+</div>
+
+<section class="hero" style="min-height:100vh">
+  <div style="position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(124,111,247,.1) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none"></div>
+  <div style="position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(20,184,166,.07) 0%,transparent 70%);bottom:0;left:10%;pointer-events:none"></div>
+  <div style="position:absolute;width:280px;height:280px;background:rgba(124,111,247,.06);border-radius:50%;top:10%;right:5%;filter:blur(60px);pointer-events:none;animation:orbf 18s linear infinite"></div>
+  <div style="position:absolute;width:200px;height:200px;background:rgba(20,184,166,.05);border-radius:50%;bottom:15%;left:5%;filter:blur(50px);pointer-events:none;animation:orbf 22s linear infinite reverse"></div>
+  <style>@keyframes orbf{0%,100%{transform:translate(0,0)}33%{transform:translate(30px,-40px)}66%{transform:translate(-20px,20px)}}</style>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Available for new projects</div>
+      <h1>Building <span class="accent">smart</span><br><span id="tw" class="accent2">digital solutions</span><span class="typewriter-cursor"></span></h1>
+      <p class="hero-sub">I help businesses automate workflows with AI, build professional websites, and create powerful spreadsheet systems — so you can focus on what matters.</p>
+      <div class="hero-btns">
+        <a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank" class="btn-primary">Hire me on Fiverr →</a>
+        <a href="https://wa.me/923167474119" target="_blank" class="btn-secondary"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> +92 316 7474 119</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem">
+        <img src="data:image/jpeg;base64,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" alt="Mubashar Khan" class="hero-avatar" style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--purple)">
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:.2rem">Mubashar Khan</div>
+          <div style="color:var(--muted);font-size:.85rem">Freelance Developer · AI Specialist</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">5.0★</div><div class="stat-label">Fiverr rating</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Satisfaction</div></div>
+        <div class="stat"><div class="stat-num">n8n</div><div class="stat-label">AI platform</div></div>
+        <div class="stat"><div class="stat-num">Fast</div><div class="stat-label">Delivery</div></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.45rem">
+        <span style="font-size:.72rem;padding:.25rem .7rem;border-radius:100px;border:.5px solid rgba(124,111,247,.4);color:var(--purple);background:rgba(124,111,247,.08)">AI Agents</span>
+        <span style="font-size:.72rem;padding:.25rem .7rem;border-radius:100px;border:.5px solid rgba(20,184,166,.4);color:var(--teal);background:rgba(20,184,166,.08)">WordPress</span>
+        <span style="font-size:.72rem;padding:.25rem .7rem;border-radius:100px;border:.5px solid rgba(249,115,22,.4);color:var(--orange);background:rgba(249,115,22,.08)">Excel & Sheets</span>
+        <span style="font-size:.72rem;padding:.25rem .7rem;border-radius:100px;border:.5px solid rgba(124,111,247,.4);color:var(--purple);background:rgba(124,111,247,.08)">n8n</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="overflow:hidden;background:var(--bg3);border-top:.5px solid var(--border);border-bottom:.5px solid var(--border);padding:.65rem 0;position:relative;z-index:1"><div style="display:flex;width:max-content;animation:mqanim 30s linear infinite"><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">AI Automation · n8n <span style="color:var(--purple);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">WordPress Websites <span style="color:var(--teal);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Excel & Google Sheets <span style="color:var(--orange);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Custom AI Agents <span style="color:var(--purple);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">5★ Rated on Fiverr <span style="color:var(--teal);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Fast Delivery <span style="color:var(--orange);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">API Integrations <span style="color:var(--purple);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Google Apps Script <span style="color:var(--teal);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">AI Automation · n8n <span style="color:var(--purple);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">WordPress Websites <span style="color:var(--teal);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Excel & Google Sheets <span style="color:var(--orange);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Custom AI Agents <span style="color:var(--purple);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">5★ Rated on Fiverr <span style="color:var(--teal);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Fast Delivery <span style="color:var(--orange);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">API Integrations <span style="color:var(--purple);font-size:.6rem">✦</span></span><span style="display:inline-flex;align-items:center;gap:.5rem;padding:0 2.2rem;font-size:.75rem;color:var(--muted);white-space:nowrap;letter-spacing:.06em;text-transform:uppercase">Google Apps Script <span style="color:var(--teal);font-size:.6rem">✦</span></span></div></div><style>@keyframes mqanim{from{transform:translateX(0)}to{transform:translateX(-50%)}}</style>
+
+<section id="services" style="background:var(--bg2)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="reveal"><div class="sec-label">What I offer</div><h2>Services built to move<br>your business forward</h2><p class="sec-sub">From AI automation to polished websites and smart spreadsheet systems — I deliver tools that work.</p></div>
+    <div class="services-grid">
+      <a href="service-ai.html" class="service-card s-purple reveal">
+        <div class="service-icon icon-p">🤖</div>
+        <h3>AI Agents</h3><div class="svc-tag p">via n8n</div>
+        <p>Custom n8n automation that works around the clock. Intelligent workflows built for your business needs.</p>
+        <ul class="svc-feat"><li>n8n workflow automation</li><li>Custom AI agent design</li><li>API & webhook integrations</li><li>Scheduled & trigger-based tasks</li></ul>
+        <span class="cta-link">View full details →</span>
+      </a>
+      <a href="service-wordpress.html" class="service-card s-teal reveal">
+        <div class="service-icon icon-t">🌐</div>
+        <h3>WordPress Websites</h3><div class="svc-tag t">Professional & fast</div>
+        <p>Clean, responsive websites tailored to your brand — built to convert visitors into clients.</p>
+        <ul class="svc-feat"><li>Custom WordPress design</li><li>Mobile-first responsive layout</li><li>SEO-ready structure</li><li>Plugin & performance setup</li></ul>
+        <span class="cta-link">View full details →</span>
+      </a>
+      <a href="service-sheets.html" class="service-card s-orange reveal">
+        <div class="service-icon icon-o">📊</div>
+        <h3>Excel & Google Sheets</h3><div class="svc-tag o">Data made clear</div>
+        <p>Smart spreadsheets and dashboards that turn your data into clear, actionable decisions.</p>
+        <ul class="svc-feat"><li>Custom dashboards & reports</li><li>Formula & macro automation</li><li>Google Apps Script</li><li>Data cleaning & analysis</li></ul>
+        <span class="cta-link">View full details →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="reveal"><div class="sec-label">How it works</div><h2>Simple, clear process</h2><p class="sec-sub">From first message to final delivery — here's what working with me looks like.</p></div>
+    <div class="proc-grid">
+      <div class="proc-step reveal"><div class="step-num">01</div><div class="step-title">Discovery</div><p class="step-desc">We discuss your needs, goals, and what success looks like for your project.</p></div>
+      <div class="proc-step reveal"><div class="step-num">02</div><div class="step-title">Proposal</div><p class="step-desc">I send a clear scope, timeline, and price — no surprises.</p></div>
+      <div class="proc-step reveal"><div class="step-num">03</div><div class="step-title">Build</div><p class="step-desc">I get to work, keeping you updated at every key milestone.</p></div>
+      <div class="proc-step reveal"><div class="step-num">04</div><div class="step-title">Deliver</div><p class="step-desc">You receive a polished, tested deliverable — ready to use from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="background:var(--bg2)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="reveal"><div class="sec-label">Portfolio</div><h2>Past work & projects</h2><p class="sec-sub">A selection of real projects delivered for clients across different industries.</p></div>
+    <div class="work-grid">
+      <a href="project-lead-agent.html" class="work-card reveal">
+        <div class="work-thumb wt-ai"><div class="wt-dots"></div>🤖<span class="wk-badge wb-p">AI Agent</span></div>
+        <div class="work-info"><h3>n8n Lead Capture Agent</h3><p>Automated lead capture workflow with API enrichment and Slack notifications.</p><div class="wk-tools"><span class="wk-tool">n8n</span><span class="wk-tool">Webhook</span><span class="wk-tool">Slack API</span></div><span class="view-more">View case study →</span></div>
+      </a>
+      <a href="project-wordpress.html" class="work-card reveal">
+        <div class="work-thumb wt-wp"><div class="wt-dots"></div>🌐<span class="wk-badge wb-t">WordPress</span></div>
+        <div class="work-info"><h3>Business Landing Page</h3><p>Professional multi-section website with contact forms and mobile-optimized design.</p><div class="wk-tools"><span class="wk-tool">WordPress</span><span class="wk-tool">Elementor</span><span class="wk-tool">WooCommerce</span></div><span class="view-more">View case study →</span></div>
+      </a>
+      <a href="project-ledger.html" class="work-card reveal">
+        <div class="work-thumb wt-xl"><div class="wt-dots"></div>📊<span class="wk-badge wb-o">Google Sheets</span></div>
+        <div class="work-info"><h3>Master Ledger System</h3><p>Multi-tab ledger with bidirectional sync, UUID tracking and automated sorting.</p><div class="wk-tools"><span class="wk-tool">Google Sheets</span><span class="wk-tool">Apps Script</span><span class="wk-tool">UUID Sync</span></div><span class="view-more">View case study →</span></div>
+      </a>
+      <a href="project-bid-tracker.html" class="work-card reveal">
+        <div class="work-thumb wt-xl" style="background:linear-gradient(135deg,#0a1a2e 0%,#0d2d4a 100%)"><div class="wt-dots"></div>🏗️<span class="wk-badge wb-o">Excel</span></div>
+        <div class="work-info"><h3>Bid Tracker — Range Road</h3><p>Construction bid tracker with SUMIF dashboards and bonding exposure tracking.</p><div class="wk-tools"><span class="wk-tool">Excel</span><span class="wk-tool">SUMIF</span><span class="wk-tool">Conditional Logic</span></div><span class="view-more">View case study →</span></div>
+      </a>
+      <a href="project-financial.html" class="work-card reveal">
+        <div class="work-thumb wt-ai" style="background:linear-gradient(135deg,#1a0a20 0%,#2d0f3d 100%)"><div class="wt-dots"></div>💰<span class="wk-badge wb-p">Google Sheets</span></div>
+        <div class="work-info"><h3>Financial Coaching Workbook</h3><p>10-sheet financial workbook with 5 debt payoff strategies and retirement planning.</p><div class="wk-tools"><span class="wk-tool">Google Sheets</span><span class="wk-tool">Debt Strategies</span><span class="wk-tool">Charts</span></div><span class="view-more">View case study →</span></div>
+      </a>
+      <a href="project-safety.html" class="work-card reveal">
+        <div class="work-thumb wt-wp" style="background:linear-gradient(135deg,#0a1a10 0%,#0d2d1a 100%)"><div class="wt-dots"></div>⚡<span class="wk-badge wb-t">Excel</span></div>
+        <div class="work-info"><h3>Daily Safety Form — Magnum</h3><p>Digital Daily Tailboard safety form replica with structured data capture fields.</p><div class="wk-tools"><span class="wk-tool">Excel</span><span class="wk-tool">VBA</span><span class="wk-tool">Form Design</span></div><span class="view-more">View case study →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="reveal"><div class="sec-label">Testimonials</div><h2>What clients say</h2></div>
+    <div class="rev-top reveal">
+      <div></div>
+      <div class="rating-box">
+        <div><div class="r-num">5.0</div><div class="r-stars">★★★★★</div><div class="r-lbl">Fiverr rating</div></div>
+        <div class="rev-div"></div>
+        <div><div class="r-num" style="font-size:1.4rem">100%</div><div class="r-lbl" style="margin-top:.35rem">Satisfaction</div></div>
+      </div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"Mubashar built exactly what I needed — a fully automated lead workflow in n8n. Delivered fast, explained everything clearly, and even added extra features I didn't ask for."</p><div class="rev-footer"><div class="rev-av av-p">JR</div><div><div class="rev-name">James R.</div><div class="rev-from">United States</div></div><span class="rev-tag wb-p">AI Agent</span></div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"The Google Sheets system he built is incredible. It tracks everything automatically, the dashboard updates in real time, and our team adopted it immediately. Worth every penny."</p><div class="rev-footer"><div class="rev-av av-o">SK</div><div><div class="rev-name">Sarah K.</div><div class="rev-from">Canada</div></div><span class="rev-tag wb-o">Sheets</span></div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"Professional, responsive and delivered a beautiful WordPress site on time. He understood my brand immediately and the final result exceeded my expectations."</p><div class="rev-footer"><div class="rev-av av-t">LM</div><div><div class="rev-name">Lena M.</div><div class="rev-from">United Kingdom</div></div><span class="rev-tag wb-t">WordPress</span></div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"Our Excel bid tracker has saved us hours every week. The SUMIF dashboards are exactly what we needed to manage our pipeline. Mubashar really understood the construction workflow."</p><div class="rev-footer"><div class="rev-av av-p">TW</div><div><div class="rev-name">Tom W.</div><div class="rev-from">Australia</div></div><span class="rev-tag wb-o">Excel</span></div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"Fast communication, clean work, no revisions needed. He built an n8n automation that runs our onboarding process end-to-end. Saved us at least 5 hours per week instantly."</p><div class="rev-footer"><div class="rev-av av-t">AM</div><div><div class="rev-name">Ahmed M.</div><div class="rev-from">UAE</div></div><span class="rev-tag wb-p">AI Agent</span></div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"The financial workbook is a game changer for our coaching clients. All 10 sheets work perfectly together, the debt payoff strategies are clearly laid out."</p><div class="rev-footer"><div class="rev-av av-o">DP</div><div><div class="rev-name">Diana P.</div><div class="rev-from">United States</div></div><span class="rev-tag wb-o">Sheets</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--bg2)">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:4rem;align-items:start" class="contact-inner-grid">
+    <div class="reveal">
+      <div class="sec-label">Get in touch</div>
+      <h2>Ready to build<br>something great?</h2>
+      <p class="sec-sub">Have a project in mind? Reach out through any channel below. I usually respond within a few hours.</p>
+      <div class="contact-chips">
+        <a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank" class="chip"><span style="width:8px;height:8px;border-radius:50%;background:var(--purple)"></span>Fiverr — fiverr.com/s/ak6yzDQ</a>
+        <a href="https://wa.me/923167474119" target="_blank" class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp — +92 316 7474 119</a>
+        <a href="mailto:mubasharlashari01@gmail.com" class="chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z" fill="#EA4335" opacity=".2"/><path d="M2 6l10 7 10-7" fill="#EA4335"/></svg> Gmail — mubasharlashari01@gmail.com</a>
+      </div>
+      <a href="https://www.fiverr.com/s/ak6yzDQ" target="_blank" class="btn-primary">View Fiverr profile →</a>
+    </div>
+    <div class="contact-box reveal">
+  <h3>Send a quick message</h3>
+  <p>Tell me about your project and I'll get back to you within a few hours.</p>
+  <input class="cb-input" type="text" placeholder="Your name">
+  <input class="cb-input" type="email" placeholder="Your email">
+  <select class="cb-input" style="cursor:none;color:var(--muted);background:var(--bg2)">
+    <option value="" disabled selected>Service you need</option>
+    <option>AI Agent / n8n Automation</option>
+    <option>WordPress Website</option>
+    <option>Excel / Google Sheets</option>
+    <option>Other / Not sure yet</option>
+  </select>
+  <textarea class="cb-input" rows="4" placeholder="Tell me about your project..."></textarea>
+  <button class="cb-btn">Send message →</button>
+</div>
+  </div>
+</section>
+<style>@media(max-width:1100px){.contact-inner-grid{grid-template-columns:1fr}.contact-box{max-width:100%}}</style>
+
+<footer>
+  <div class="foot-logo">Mubashar<span>.</span></div>
+  <p style="color:var(--muted);font-size:.8rem">AI Agents · WordPress · Excel & Google Sheets</p>
+  <div class="foot-links">
+    <a href="https://wa.me/923167474119" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> +92 316 7474 119</a>
+    <a href="mailto:mubasharlashari01@gmail.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z" fill="#EA4335" opacity=".2"/><path d="M2 6l10 7 10-7" fill="#EA4335"/></svg> mubasharlashari01@gmail.com</a>
+  </div>
+</footer>
+<script>
+const dot=document.querySelector('.c-dot'),ring=document.querySelector('.c-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,input,textarea,select').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'))});
+const ham=document.querySelector('.ham'),mob=document.querySelector('.mob-nav'),mc=document.querySelector('.mob-close-btn');
+if(ham){ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});if(mc)mc.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open')});document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open')}))}
+const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const cb=document.querySelector('.cb-btn');
+if(cb)cb.addEventListener('click',()=>{const ins=document.querySelectorAll('.cb-input');let ok=true;ins.forEach(i=>{if(!i.value.trim()){i.style.borderColor='var(--orange)';ok=false}else i.style.borderColor=''});if(ok){cb.textContent='Message sent ✓';cb.style.background='#0f6e56';setTimeout(()=>{cb.textContent='Send message →';cb.style.background='';ins.forEach(i=>i.value='')},3000)}});
+const cv=document.createElement('canvas');cv.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45';document.body.prepend(cv);
+const ctx=cv.getContext('2d');let W,H;const rsz=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rsz();addEventListener('resize',rsz);
+const pts=Array.from({length:45},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.2+.3,c:['rgba(124,111,247,','rgba(20,184,166,','rgba(249,115,22,'][Math.floor(Math.random()*3)]}));
+(function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+'.3)';ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(124,111,247,'+(0.05*(1-d/110))+')';ctx.lineWidth=.5;ctx.stroke()}}requestAnimationFrame(draw)})();
+
+// typewriter
+const words=['digital solutions','AI workflows','smart automation','better tools'];
+let wi=0,ci=0,del=false;
+const tw=document.getElementById('tw');
+if(tw){function tp(){const w=words[wi];if(!del){tw.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(tp,1800);return}}else{tw.textContent=w.slice(0,--ci);if(ci===0){del=false;wi=(wi+1)%words.length}}setTimeout(tp,del?55:85)}setTimeout(tp,1400);}
+</script>
+</body></html>
