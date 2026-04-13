@@ -9,7 +9,7 @@
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#080f1c;--bg2:#0d1b2e;--bg3:#112034;--purple:#7c6ff7;--teal:#14b8a6;--orange:#f97316;--white:#f1f5f9;--muted:#5a7090;--border:#1e3a5f;}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;cursor:none}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;cursor:none}.cb-input{cursor:text}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
 .c-dot,.c-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
 .c-dot{width:8px;height:8px;background:var(--purple);transition:width .15s,height .15s,background .2s}
@@ -33,7 +33,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:fl
 .mob-nav.open{display:flex}
 .mob-nav a{font-family:'Outfit',sans-serif;font-weight:700;font-size:2.2rem;color:var(--white);text-decoration:none;letter-spacing:-.03em}
 .mob-nav a:hover{color:var(--purple)}
-.mob-close-btn{position:absolute;top:1.4rem;right:5%;font-size:1.5rem;color:var(--muted);background:none;border:none;cursor:none}
+.mob-close-btn{position:absolute;top:1.4rem;right:5%;font-size:1.5rem;color:var(--muted);background:none;border:none;cursor:none}.cb-input{cursor:text}
 section{padding:5rem 5%;position:relative;z-index:1}
 .sec-label{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem}
 h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:1rem}
@@ -56,7 +56,7 @@ footer{padding:2rem 5%;border-top:.5px solid var(--border);display:flex;align-it
 .contact-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(124,111,247,.07),transparent 60%);pointer-events:none}
 .contact-box h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.3rem;margin-bottom:.35rem}
 .contact-box p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem}
-.cb-input{width:100%;background:var(--bg2);border:.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:.7rem;resize:none;cursor:none}
+.cb-input{width:100%;background:var(--bg2);border:.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:.7rem;resize:none;cursor:none}.cb-input{cursor:text}
 .cb-input:focus{border-color:var(--purple)}
 .cb-input::placeholder{color:var(--muted)}
 .cb-btn{width:100%;background:var(--purple);color:var(--white);border:none;border-radius:10px;padding:1rem;font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;cursor:none;transition:opacity .2s,transform .2s}
@@ -340,18 +340,14 @@ footer{padding:2rem 5%;border-top:.5px solid var(--border);display:flex;align-it
     </div>
     <div class="contact-box reveal">
   <h3>Send a quick message</h3>
-  <p>Tell me about your project and I'll get back to you within a few hours.</p>
-  <input class="cb-input" type="text" placeholder="Your name">
-  <input class="cb-input" type="email" placeholder="Your email">
-  <select class="cb-input" style="cursor:none;color:var(--muted);background:var(--bg2)">
-    <option value="" disabled selected>Service you need</option>
-    <option>AI Agent / n8n Automation</option>
-    <option>WordPress Website</option>
-    <option>Excel / Google Sheets</option>
-    <option>Other / Not sure yet</option>
-  </select>
-  <textarea class="cb-input" rows="4" placeholder="Tell me about your project..."></textarea>
-  <button class="cb-btn">Send message →</button>
+  <p class="cb-sub">Tell me about your project and I'll get back to you fast.</p>
+  <form action="https://formspree.io/f/xwvakpqb" method="POST" style="display:flex;flex-direction:column">
+    <input class="cb-input" type="text" name="name" placeholder="Your name" required>
+    <input class="cb-input" type="email" name="email" placeholder="Your email" required>
+    <textarea class="cb-input" name="message" rows="4" placeholder="Describe your project..." required></textarea>
+    <input type="hidden" name="_subject" value="New inquiry from portfolio site">
+    <button type="submit" class="cb-btn">Send message →</button>
+  </form>
 </div>
   </div>
 </section>
